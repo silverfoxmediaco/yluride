@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "YLU Ride - Luxury Mercedes Van Rental Service",
   "scripts": {
-    "install-all": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
     "build": "cd frontend && npm run build",
     "start": "cd backend && node server.js",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
     "clean": "rm -rf backend/node_modules frontend/node_modules frontend/build",
-    "reinstall": "npm run clean && npm run install-all"
+    "reinstall": "npm run clean && npm run postinstall"
   },
   "keywords": ["luxury", "van", "rental", "mercedes", "transportation"],
   "author": "Silver Fox Media Co",
