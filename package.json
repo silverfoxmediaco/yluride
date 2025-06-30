@@ -1,0 +1,17 @@
+{
+    "name": "yluride",
+    "version": "1.0.0",
+    "description": "YLU Ride - Luxury Van Rental Service",
+    "scripts": {
+      "install": "cd backend && npm install && cd ../frontend && npm install",
+      "build": "cd frontend && npm run build",
+      "start": "cd backend && npm start",
+      "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+    },
+    "keywords": ["luxury", "van", "rental", "mercedes", "transportation"],
+    "author": "Silver Fox Media Co",
+    "license": "ISC",
+    "devDependencies": {
+      "concurrently": "^8.2.0"
+    }
+  }
