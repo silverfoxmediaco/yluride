@@ -35,14 +35,59 @@ app.get('/api/health', (req, res) => {
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
-  // Serve static files from the React frontend app
-  // The build folder is copied to backend/build by the build script
-  app.use(express.static(path.join(__dirname, 'build')));
+  // Check if build folder exists
+  const buildPath = path.join(__dirname, '..', 'frontend', 'build');
+  const fs = require('fs');
+  
+  if (fs.existsSync(buildPath)) {
+    // Serve static files from the React frontend app
+    app.use(express.static(buildPath));
 
-  // Anything that doesn't match the above, send back React's index.html file
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
+    // Anything that doesn't match the above, send back React's index.html file
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(buildPath, 'index.html'));
+    });
+  } else {
+    // If no build folder, serve a simple message
+    app.get('*', (req, res) => {
+      res.send(`
+        <html>
+          <head>
+            <title>YLU Ride - Coming Soon</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f5f5f5;
+              }
+              .container {
+                text-align: center;
+                padding: 20px;
+              }
+              h1 {
+                color: #333;
+              }
+              p {
+                color: #666;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>YLU Ride</h1>
+              <p>Luxury Van Rental Service</p>
+              <p>Website coming soon...</p>
+              <p><small>API Status: ${process.env.NODE_ENV === 'production' ? 'Production' : 'Development'}</small></p>
+            </div>
+          </body>
+        </html>
+      `);
+    });
+  }
 }
 
 // Error handling middleware
@@ -67,7 +112,7 @@ if (MONGODB_URI) {
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err);
-    console.log(' Running without database - Frontend only mode');
+    console.log('Running without database - Frontend only mode');
   });
 
   // Handle MongoDB connection errors after initial connection
@@ -83,7 +128,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
   if (!MONGODB_URI) {
     console.log('Running without database connection');
   }

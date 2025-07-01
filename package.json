@@ -2,19 +2,39 @@
   "name": "yluride",
   "version": "1.0.0",
   "description": "YLURide - Luxury Mercedes Van Rental Service",
+  "main": "backend/server.js",
   "scripts": {
-    "install-all": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
-    "build": "cd frontend && npm run build && cp -r build ../backend/",
-    "start": "cd backend && node server.js",
+    "start": "node backend/server.js",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
-    "clean": "rm -rf backend/node_modules frontend/node_modules frontend/build backend/package-lock.json frontend/package-lock.json",
-    "reinstall": "npm run clean && npm cache clean --force && npm install"
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
+    "build": "cd frontend && npm install --legacy-peer-deps && npm run build && cp -r build ../backend/",
+    "heroku-postbuild": "npm run install-all && npm run build"
   },
   "keywords": ["luxury", "van", "rental", "mercedes", "transportation"],
   "author": "Silver Fox Media Co",
   "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.5",
+    "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.0.0",
+    "express": "^4.18.2",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mongoose": "^8.16.1",
+    "multer": "^2.0.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^7.0.3",
+    "stripe": "^18.2.1",
+    "twilio": "^5.7.1"
+  },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.1.10"
   },
   "engines": {
     "node": ">=18.0.0",
