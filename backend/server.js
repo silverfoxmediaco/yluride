@@ -37,7 +37,7 @@ app.get('/api/health', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   // Serve static files from the React frontend app
   app.use(express.static(path.join(__dirname, '../frontend/build')));
-  
+
   // Anything that doesn't match the above, send back React's index.html file
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
