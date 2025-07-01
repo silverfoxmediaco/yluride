@@ -36,11 +36,12 @@ app.get('/api/health', (req, res) => {
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
   // Serve static files from the React frontend app
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  // The build folder is copied to backend/build by the build script
+  app.use(express.static(path.join(__dirname, 'build')));
 
   // Anything that doesn't match the above, send back React's index.html file
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 }
 
@@ -65,7 +66,7 @@ if (MONGODB_URI) {
     console.log('Connected to MongoDB');
   })
   .catch((err) => {
-    console.error('⚠️ MongoDB connection error:', err);
+    console.error('MongoDB connection error:', err);
     console.log(' Running without database - Frontend only mode');
   });
 
@@ -84,6 +85,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
   if (!MONGODB_URI) {
-    console.log('⚠️  Running without database connection');
+    console.log('Running without database connection');
   }
 });
