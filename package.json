@@ -3,9 +3,8 @@
     "version": "1.0.0",
     "description": "YLU Ride - Luxury Van Rental Service",
     "scripts": {
-  "start": "cd backend && npm start"
-}
-,
+  "start": "node server.js"
+},
     "keywords": ["luxury", "van", "rental", "mercedes", "transportation"],
     "author": "Silver Fox Media Co",
     "license": "ISC",
