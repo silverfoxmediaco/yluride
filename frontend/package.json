@@ -1,23 +1,37 @@
 {
-  "name": "yluride",
-  "version": "1.0.0",
-  "description": "YLU Ride - Luxury Mercedes Van Rental Service",
+  "name": "yluride-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2",
+    "axios": "^1.4.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
-    "postinstall": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
-    "build": "cd frontend && npm run build",
-    "start": "cd backend && node server.js",
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
-    "clean": "rm -rf backend/node_modules frontend/node_modules frontend/build",
-    "reinstall": "npm run clean && npm run postinstall"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "keywords": ["luxury", "van", "rental", "mercedes", "transportation"],
-  "author": "Silver Fox Media Co",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^8.2.0"
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  }
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000"
 }

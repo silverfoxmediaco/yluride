@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "description": "YLURide - Luxury Mercedes Van Rental Service",
   "scripts": {
-    "build": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps && npm run build && cp -r build ../backend/",
-    "start": "cd backend && node server.js"
+    "install-all": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
+    "build": "cd frontend && npm run build && cp -r build ../backend/",
+    "start": "cd backend && node server.js",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "clean": "rm -rf backend/node_modules frontend/node_modules frontend/build backend/package-lock.json frontend/package-lock.json",
+    "reinstall": "npm run clean && npm cache clean --force && npm install"
   },
   "keywords": ["luxury", "van", "rental", "mercedes", "transportation"],
   "author": "Silver Fox Media Co",
   "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
