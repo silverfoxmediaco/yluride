@@ -62,11 +62,11 @@ if (MONGODB_URI) {
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('✅ Connected to MongoDB');
+    console.log('Connected to MongoDB');
   })
   .catch((err) => {
     console.error('⚠️ MongoDB connection error:', err);
-    console.log('🔧 Running without database - Frontend only mode');
+    console.log(' Running without database - Frontend only mode');
   });
 
   // Handle MongoDB connection errors after initial connection
@@ -74,14 +74,14 @@ if (MONGODB_URI) {
     console.error('MongoDB connection error:', err);
   });
 } else {
-  console.log('🔧 No MongoDB URI provided - Running in frontend-only mode');
+  console.log('No MongoDB URI provided - Running in frontend-only mode');
 }
 
 // Start server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
   console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
   if (!MONGODB_URI) {
     console.log('⚠️  Running without database connection');
